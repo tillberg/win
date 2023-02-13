@@ -1377,36 +1377,6 @@ const (
 	DI_NORMAL      = DI_IMAGE | DI_MASK
 )
 
-// WM_NCHITTEST constants
-const (
-	HTBORDER      = 18
-	HTBOTTOM      = 15
-	HTBOTTOMLEFT  = 16
-	HTBOTTOMRIGHT = 17
-	HTCAPTION     = 2
-	HTCLIENT      = 1
-	HTCLOSE       = 20
-	HTERROR       = -2
-	HTGROWBOX     = 4
-	HTHELP        = 21
-	HTHSCROLL     = 6
-	HTLEFT        = 10
-	HTMENU        = 5
-	HTMAXBUTTON   = 9
-	HTMINBUTTON   = 8
-	HTNOWHERE     = 0
-	HTREDUCE      = 8
-	HTRIGHT       = 11
-	HTSIZE        = 4
-	HTSYSMENU     = 3
-	HTTOP         = 12
-	HTTOPLEFT     = 13
-	HTTOPRIGHT    = 14
-	HTTRANSPARENT = -1
-	HTVSCROLL     = 7
-	HTZOOM        = 9
-)
-
 // AnimateWindow flags
 const (
 	AW_ACTIVATE     = 0x00020000
@@ -1590,16 +1560,6 @@ type NMHDR struct {
 	HwndFrom HWND
 	IdFrom   uintptr
 	Code     uint32
-}
-
-type WINDOWPOS struct {
-	Wnd            HWND
-	WndInsertAfter HWND
-	X              int
-	Y              int
-	CX             int
-	CY             int
-	Flags          uint32
 }
 
 type NCCALCSIZE_PARAMS struct {
@@ -1954,126 +1914,18 @@ var (
 	updateWindow                *windows.LazyProc
 	windowFromDC                *windows.LazyProc
 	windowFromPoint             *windows.LazyProc
-	adjustWindowRect            uintptr
-	beginDeferWindowPos         uintptr
-	beginPaint                  uintptr
-	callWindowProc              uintptr
-	clientToScreen              uintptr
-	closeClipboard              uintptr
-	createDialogParam           uintptr
-	getDlgItem                  uintptr
-	createIconIndirect          uintptr
-	createMenu                  uintptr
-	createPopupMenu             uintptr
-	createWindowEx              uintptr
-	deferWindowPos              uintptr
-	defWindowProc               uintptr
-	destroyIcon                 uintptr
-	destroyMenu                 uintptr
-	destroyWindow               uintptr
-	dialogBoxParam              uintptr
-	dispatchMessage             uintptr
-	drawMenuBar                 uintptr
-	drawFocusRect               uintptr
-	drawTextEx                  uintptr
-	emptyClipboard              uintptr
-	enableWindow                uintptr
-	endDeferWindowPos           uintptr
-	endDialog                   uintptr
-	endPaint                    uintptr
-	enumChildWindows            uintptr
-	findWindow                  uintptr
-	getClassInfoEx              uintptr
-	getClassInfo                uintptr
-	getClassLong                uintptr
-	getClassName                uintptr
-	getAncestor                 uintptr
-	getCaretPos                 uintptr
-	getClientRect               uintptr
-	getClipboardData            uintptr
-	getCursorPos                uintptr
-	getDC                       uintptr
-	getFocus                    uintptr
-	getKeyState                 uintptr
-	vkKeyScan                   uintptr
-	mapVirtualKey               uintptr
-	getMenuInfo                 uintptr
-	getMessage                  uintptr
-	setWindowText               uintptr
-	getWindowTextLength         uintptr
-	getWindowText               uintptr
-	getMonitorInfo              uintptr
-	getProp                     uintptr
-	setProp                     uintptr
-	getParent                   uintptr
-	getRawInputData             uintptr
-	getSysColor                 uintptr
-	getSysColorBrush            uintptr
-	getSystemMetrics            uintptr
-	getWindow                   uintptr
-	getDesktopWindow            uintptr
-	getWindowLong               uintptr
-	getWindowLongPtr            uintptr
-	getWindowPlacement          uintptr
-	getWindowRect               uintptr
-	insertMenuItem              uintptr
-	invalidateRect              uintptr
-	isChild                     uintptr
-	isClipboardFormatAvailable  uintptr
-	isDialogMessage             uintptr
-	isWindowEnabled             uintptr
-	isWindowVisible             uintptr
-	killTimer                   uintptr
-	loadCursor                  uintptr
-	loadIcon                    uintptr
-	loadImage                   uintptr
-	loadMenu                    uintptr
-	loadString                  uintptr
-	messageBeep                 uintptr
-	messageBox                  uintptr
-	monitorFromWindow           uintptr
-	moveWindow                  uintptr
-	unregisterClass             uintptr
-	openClipboard               uintptr
-	peekMessage                 uintptr
-	postMessage                 uintptr
-	postQuitMessage             uintptr
-	registerClassEx             uintptr
-	registerRawInputDevices     uintptr
-	registerWindowMessage       uintptr
-	getCapture                  uintptr
-	releaseCapture              uintptr
-	releaseDC                   uintptr
-	removeMenu                  uintptr
-	screenToClient              uintptr
-	sendDlgItemMessage          uintptr
-	sendInput                   uintptr
-	sendMessage                 uintptr
-	setActiveWindow             uintptr
-	setCapture                  uintptr
-	setClipboardData            uintptr
-	setCursor                   uintptr
-	setCursorPos                uintptr
-	setFocus                    uintptr
-	getForegroundWindow         uintptr
-	setForegroundWindow         uintptr
-	setLayeredWindowAttributes  uintptr
-	setMenu                     uintptr
-	setMenuInfo                 uintptr
-	setMenuItemInfo             uintptr
-	setParent                   uintptr
-	setRect                     uintptr
-	setTimer                    uintptr
-	setWindowLong               uintptr
-	setWindowLongPtr            uintptr
-	setWindowPlacement          uintptr
-	setWindowPos                uintptr
-	showWindow                  uintptr
-	systemParametersInfo        uintptr
-	trackPopupMenuEx            uintptr
-	translateMessage            uintptr
-	updateWindow                uintptr
-	windowFromPoint             uintptr
+	getClassInfoEx              *windows.LazyProc
+	getClassInfo                *windows.LazyProc
+	getClassLong                *windows.LazyProc
+	vkKeyScan                   *windows.LazyProc
+	mapVirtualKey               *windows.LazyProc
+	setWindowText               *windows.LazyProc
+	getWindowTextLength         *windows.LazyProc
+	getWindowText               *windows.LazyProc
+	getProp                     *windows.LazyProc
+	setProp                     *windows.LazyProc
+	getCapture                  *windows.LazyProc
+	setLayeredWindowAttributes  *windows.LazyProc
 )
 
 func init() {
@@ -2153,65 +2005,64 @@ func init() {
 	getSystemMetricsForDpi = libuser32.NewProc("GetSystemMetricsForDpi")
 	getWindow = libuser32.NewProc("GetWindow")
 	getWindowLong = libuser32.NewProc("GetWindowLongW")
-	adjustWindowRect = MustGetProcAddress(libuser32, "AdjustWindowRect")
-	beginDeferWindowPos = MustGetProcAddress(libuser32, "BeginDeferWindowPos")
-	beginPaint = MustGetProcAddress(libuser32, "BeginPaint")
-	callWindowProc = MustGetProcAddress(libuser32, "CallWindowProcW")
-	clientToScreen = MustGetProcAddress(libuser32, "ClientToScreen")
-	closeClipboard = MustGetProcAddress(libuser32, "CloseClipboard")
-	createDialogParam = MustGetProcAddress(libuser32, "CreateDialogParamW")
-	getDlgItem = MustGetProcAddress(libuser32, "GetDlgItem")
-	createIconIndirect = MustGetProcAddress(libuser32, "CreateIconIndirect")
-	createMenu = MustGetProcAddress(libuser32, "CreateMenu")
-	createPopupMenu = MustGetProcAddress(libuser32, "CreatePopupMenu")
-	createWindowEx = MustGetProcAddress(libuser32, "CreateWindowExW")
-	deferWindowPos = MustGetProcAddress(libuser32, "DeferWindowPos")
-	defWindowProc = MustGetProcAddress(libuser32, "DefWindowProcW")
-	destroyIcon = MustGetProcAddress(libuser32, "DestroyIcon")
-	destroyMenu = MustGetProcAddress(libuser32, "DestroyMenu")
-	destroyWindow = MustGetProcAddress(libuser32, "DestroyWindow")
-	dialogBoxParam = MustGetProcAddress(libuser32, "DialogBoxParamW")
-	dispatchMessage = MustGetProcAddress(libuser32, "DispatchMessageW")
-	drawFocusRect = MustGetProcAddress(libuser32, "DrawFocusRect")
-	drawMenuBar = MustGetProcAddress(libuser32, "DrawMenuBar")
-	drawTextEx = MustGetProcAddress(libuser32, "DrawTextExW")
-	emptyClipboard = MustGetProcAddress(libuser32, "EmptyClipboard")
-	enableWindow = MustGetProcAddress(libuser32, "EnableWindow")
-	endDeferWindowPos = MustGetProcAddress(libuser32, "EndDeferWindowPos")
-	endDialog = MustGetProcAddress(libuser32, "EndDialog")
-	endPaint = MustGetProcAddress(libuser32, "EndPaint")
-	enumChildWindows = MustGetProcAddress(libuser32, "EnumChildWindows")
-	findWindow = MustGetProcAddress(libuser32, "FindWindowW")
-	getClassInfoEx = MustGetProcAddress(libuser32, "GetClassInfoExW")
-	getClassInfo = MustGetProcAddress(libuser32, "GetClassInfoW")
-	getClassLong = MustGetProcAddress(libuser32, "GetClassLongW")
-	getClassName = MustGetProcAddress(libuser32, "GetClassNameW")
-	getAncestor = MustGetProcAddress(libuser32, "GetAncestor")
-	getCaretPos = MustGetProcAddress(libuser32, "GetCaretPos")
-	getClientRect = MustGetProcAddress(libuser32, "GetClientRect")
-	getClipboardData = MustGetProcAddress(libuser32, "GetClipboardData")
-	getCursorPos = MustGetProcAddress(libuser32, "GetCursorPos")
-	getDC = MustGetProcAddress(libuser32, "GetDC")
-	getFocus = MustGetProcAddress(libuser32, "GetFocus")
-	getKeyState = MustGetProcAddress(libuser32, "GetKeyState")
-	vkKeyScan = MustGetProcAddress(libuser32, "VkKeyScanW")
-	mapVirtualKey = MustGetProcAddress(libuser32, "MapVirtualKeyW")
-	getMenuInfo = MustGetProcAddress(libuser32, "GetMenuInfo")
-	getMessage = MustGetProcAddress(libuser32, "GetMessageW")
-	setWindowText = MustGetProcAddress(libuser32, "SetWindowTextW")
-	getWindowTextLength = MustGetProcAddress(libuser32, "GetWindowTextLengthW")
-	getWindowText = MustGetProcAddress(libuser32, "GetWindowTextW")
-	getMonitorInfo = MustGetProcAddress(libuser32, "GetMonitorInfoW")
-	getProp = MustGetProcAddress(libuser32, "GetPropW")
-	setProp = MustGetProcAddress(libuser32, "SetPropW")
-	getParent = MustGetProcAddress(libuser32, "GetParent")
-	getRawInputData = MustGetProcAddress(libuser32, "GetRawInputData")
-	getSysColor = MustGetProcAddress(libuser32, "GetSysColor")
-	getSysColorBrush = MustGetProcAddress(libuser32, "GetSysColorBrush")
-	getSystemMetrics = MustGetProcAddress(libuser32, "GetSystemMetrics")
-	getWindow = MustGetProcAddress(libuser32, "GetWindow")
-	getDesktopWindow = MustGetProcAddress(libuser32, "GetDesktopWindow")
-	getWindowLong = MustGetProcAddress(libuser32, "GetWindowLongW")
+	adjustWindowRect = libuser32.NewProc("AdjustWindowRect")
+	beginDeferWindowPos = libuser32.NewProc("BeginDeferWindowPos")
+	beginPaint = libuser32.NewProc("BeginPaint")
+	callWindowProc = libuser32.NewProc("CallWindowProcW")
+	clientToScreen = libuser32.NewProc("ClientToScreen")
+	closeClipboard = libuser32.NewProc("CloseClipboard")
+	createDialogParam = libuser32.NewProc("CreateDialogParamW")
+	createIconIndirect = libuser32.NewProc("CreateIconIndirect")
+	createMenu = libuser32.NewProc("CreateMenu")
+	createPopupMenu = libuser32.NewProc("CreatePopupMenu")
+	createWindowEx = libuser32.NewProc("CreateWindowExW")
+	deferWindowPos = libuser32.NewProc("DeferWindowPos")
+	defWindowProc = libuser32.NewProc("DefWindowProcW")
+	destroyIcon = libuser32.NewProc("DestroyIcon")
+	destroyMenu = libuser32.NewProc("DestroyMenu")
+	destroyWindow = libuser32.NewProc("DestroyWindow")
+	dialogBoxParam = libuser32.NewProc("DialogBoxParamW")
+	dispatchMessage = libuser32.NewProc("DispatchMessageW")
+	drawFocusRect = libuser32.NewProc("DrawFocusRect")
+	drawMenuBar = libuser32.NewProc("DrawMenuBar")
+	drawTextEx = libuser32.NewProc("DrawTextExW")
+	emptyClipboard = libuser32.NewProc("EmptyClipboard")
+	enableWindow = libuser32.NewProc("EnableWindow")
+	endDeferWindowPos = libuser32.NewProc("EndDeferWindowPos")
+	endDialog = libuser32.NewProc("EndDialog")
+	endPaint = libuser32.NewProc("EndPaint")
+	enumChildWindows = libuser32.NewProc("EnumChildWindows")
+	findWindow = libuser32.NewProc("FindWindowW")
+	getClassInfoEx = libuser32.NewProc("GetClassInfoExW")
+	getClassInfo = libuser32.NewProc("GetClassInfoW")
+	getClassLong = libuser32.NewProc("GetClassLongW")
+	getClassName = libuser32.NewProc("GetClassNameW")
+	getAncestor = libuser32.NewProc("GetAncestor")
+	getCaretPos = libuser32.NewProc("GetCaretPos")
+	getClientRect = libuser32.NewProc("GetClientRect")
+	getClipboardData = libuser32.NewProc("GetClipboardData")
+	getCursorPos = libuser32.NewProc("GetCursorPos")
+	getDC = libuser32.NewProc("GetDC")
+	getFocus = libuser32.NewProc("GetFocus")
+	getKeyState = libuser32.NewProc("GetKeyState")
+	vkKeyScan = libuser32.NewProc("VkKeyScanW")
+	mapVirtualKey = libuser32.NewProc("MapVirtualKeyW")
+	getMenuInfo = libuser32.NewProc("GetMenuInfo")
+	getMessage = libuser32.NewProc("GetMessageW")
+	setWindowText = libuser32.NewProc("SetWindowTextW")
+	getWindowTextLength = libuser32.NewProc("GetWindowTextLengthW")
+	getWindowText = libuser32.NewProc("GetWindowTextW")
+	getMonitorInfo = libuser32.NewProc("GetMonitorInfoW")
+	getProp = libuser32.NewProc("GetPropW")
+	setProp = libuser32.NewProc("SetPropW")
+	getParent = libuser32.NewProc("GetParent")
+	getRawInputData = libuser32.NewProc("GetRawInputData")
+	getSysColor = libuser32.NewProc("GetSysColor")
+	getSysColorBrush = libuser32.NewProc("GetSysColorBrush")
+	getSystemMetrics = libuser32.NewProc("GetSystemMetrics")
+	getWindow = libuser32.NewProc("GetWindow")
+	getDesktopWindow = libuser32.NewProc("GetDesktopWindow")
+	getWindowLong = libuser32.NewProc("GetWindowLongW")
 	// On 32 bit GetWindowLongPtrW is not available
 	if is64bit {
 		getWindowLongPtr = libuser32.NewProc("GetWindowLongPtrW")
@@ -2275,57 +2126,57 @@ func init() {
 	setTimer = libuser32.NewProc("SetTimer")
 	setWinEventHook = libuser32.NewProc("SetWinEventHook")
 	setWindowLong = libuser32.NewProc("SetWindowLongW")
-	getWindowPlacement = MustGetProcAddress(libuser32, "GetWindowPlacement")
-	getWindowRect = MustGetProcAddress(libuser32, "GetWindowRect")
-	insertMenuItem = MustGetProcAddress(libuser32, "InsertMenuItemW")
-	invalidateRect = MustGetProcAddress(libuser32, "InvalidateRect")
-	isChild = MustGetProcAddress(libuser32, "IsChild")
-	isClipboardFormatAvailable = MustGetProcAddress(libuser32, "IsClipboardFormatAvailable")
-	isDialogMessage = MustGetProcAddress(libuser32, "IsDialogMessageW")
-	isWindowEnabled = MustGetProcAddress(libuser32, "IsWindowEnabled")
-	isWindowVisible = MustGetProcAddress(libuser32, "IsWindowVisible")
-	killTimer = MustGetProcAddress(libuser32, "KillTimer")
-	loadCursor = MustGetProcAddress(libuser32, "LoadCursorW")
-	loadIcon = MustGetProcAddress(libuser32, "LoadIconW")
-	loadImage = MustGetProcAddress(libuser32, "LoadImageW")
-	loadMenu = MustGetProcAddress(libuser32, "LoadMenuW")
-	loadString = MustGetProcAddress(libuser32, "LoadStringW")
-	messageBeep = MustGetProcAddress(libuser32, "MessageBeep")
-	messageBox = MustGetProcAddress(libuser32, "MessageBoxW")
-	monitorFromWindow = MustGetProcAddress(libuser32, "MonitorFromWindow")
-	moveWindow = MustGetProcAddress(libuser32, "MoveWindow")
-	unregisterClass = MustGetProcAddress(libuser32, "UnregisterClassW")
-	openClipboard = MustGetProcAddress(libuser32, "OpenClipboard")
-	peekMessage = MustGetProcAddress(libuser32, "PeekMessageW")
-	postMessage = MustGetProcAddress(libuser32, "PostMessageW")
-	postQuitMessage = MustGetProcAddress(libuser32, "PostQuitMessage")
-	registerClassEx = MustGetProcAddress(libuser32, "RegisterClassExW")
-	registerRawInputDevices = MustGetProcAddress(libuser32, "RegisterRawInputDevices")
-	registerWindowMessage = MustGetProcAddress(libuser32, "RegisterWindowMessageW")
-	getCapture = MustGetProcAddress(libuser32, "GetCapture")
-	releaseCapture = MustGetProcAddress(libuser32, "ReleaseCapture")
-	releaseDC = MustGetProcAddress(libuser32, "ReleaseDC")
-	removeMenu = MustGetProcAddress(libuser32, "RemoveMenu")
-	screenToClient = MustGetProcAddress(libuser32, "ScreenToClient")
-	sendDlgItemMessage = MustGetProcAddress(libuser32, "SendDlgItemMessageW")
-	sendInput = MustGetProcAddress(libuser32, "SendInput")
-	sendMessage = MustGetProcAddress(libuser32, "SendMessageW")
-	setActiveWindow = MustGetProcAddress(libuser32, "SetActiveWindow")
-	setCapture = MustGetProcAddress(libuser32, "SetCapture")
-	setClipboardData = MustGetProcAddress(libuser32, "SetClipboardData")
-	setCursor = MustGetProcAddress(libuser32, "SetCursor")
-	setCursorPos = MustGetProcAddress(libuser32, "SetCursorPos")
-	setFocus = MustGetProcAddress(libuser32, "SetFocus")
-	getForegroundWindow = MustGetProcAddress(libuser32, "GetForegroundWindow")
-	setForegroundWindow = MustGetProcAddress(libuser32, "SetForegroundWindow")
-	setLayeredWindowAttributes = MustGetProcAddress(libuser32, "SetLayeredWindowAttributes")
-	setMenu = MustGetProcAddress(libuser32, "SetMenu")
-	setMenuInfo = MustGetProcAddress(libuser32, "SetMenuInfo")
-	setMenuItemInfo = MustGetProcAddress(libuser32, "SetMenuItemInfoW")
-	setRect = MustGetProcAddress(libuser32, "SetRect")
-	setParent = MustGetProcAddress(libuser32, "SetParent")
-	setTimer = MustGetProcAddress(libuser32, "SetTimer")
-	setWindowLong = MustGetProcAddress(libuser32, "SetWindowLongW")
+	getWindowPlacement = libuser32.NewProc("GetWindowPlacement")
+	getWindowRect = libuser32.NewProc("GetWindowRect")
+	insertMenuItem = libuser32.NewProc("InsertMenuItemW")
+	invalidateRect = libuser32.NewProc("InvalidateRect")
+	isChild = libuser32.NewProc("IsChild")
+	isClipboardFormatAvailable = libuser32.NewProc("IsClipboardFormatAvailable")
+	isDialogMessage = libuser32.NewProc("IsDialogMessageW")
+	isWindowEnabled = libuser32.NewProc("IsWindowEnabled")
+	isWindowVisible = libuser32.NewProc("IsWindowVisible")
+	killTimer = libuser32.NewProc("KillTimer")
+	loadCursor = libuser32.NewProc("LoadCursorW")
+	loadIcon = libuser32.NewProc("LoadIconW")
+	loadImage = libuser32.NewProc("LoadImageW")
+	loadMenu = libuser32.NewProc("LoadMenuW")
+	loadString = libuser32.NewProc("LoadStringW")
+	messageBeep = libuser32.NewProc("MessageBeep")
+	messageBox = libuser32.NewProc("MessageBoxW")
+	monitorFromWindow = libuser32.NewProc("MonitorFromWindow")
+	moveWindow = libuser32.NewProc("MoveWindow")
+	unregisterClass = libuser32.NewProc("UnregisterClassW")
+	openClipboard = libuser32.NewProc("OpenClipboard")
+	peekMessage = libuser32.NewProc("PeekMessageW")
+	postMessage = libuser32.NewProc("PostMessageW")
+	postQuitMessage = libuser32.NewProc("PostQuitMessage")
+	registerClassEx = libuser32.NewProc("RegisterClassExW")
+	registerRawInputDevices = libuser32.NewProc("RegisterRawInputDevices")
+	registerWindowMessage = libuser32.NewProc("RegisterWindowMessageW")
+	getCapture = libuser32.NewProc("GetCapture")
+	releaseCapture = libuser32.NewProc("ReleaseCapture")
+	releaseDC = libuser32.NewProc("ReleaseDC")
+	removeMenu = libuser32.NewProc("RemoveMenu")
+	screenToClient = libuser32.NewProc("ScreenToClient")
+	sendDlgItemMessage = libuser32.NewProc("SendDlgItemMessageW")
+	sendInput = libuser32.NewProc("SendInput")
+	sendMessage = libuser32.NewProc("SendMessageW")
+	setActiveWindow = libuser32.NewProc("SetActiveWindow")
+	setCapture = libuser32.NewProc("SetCapture")
+	setClipboardData = libuser32.NewProc("SetClipboardData")
+	setCursor = libuser32.NewProc("SetCursor")
+	setCursorPos = libuser32.NewProc("SetCursorPos")
+	setFocus = libuser32.NewProc("SetFocus")
+	getForegroundWindow = libuser32.NewProc("GetForegroundWindow")
+	setForegroundWindow = libuser32.NewProc("SetForegroundWindow")
+	setLayeredWindowAttributes = libuser32.NewProc("SetLayeredWindowAttributes")
+	setMenu = libuser32.NewProc("SetMenu")
+	setMenuInfo = libuser32.NewProc("SetMenuInfo")
+	setMenuItemInfo = libuser32.NewProc("SetMenuItemInfoW")
+	setRect = libuser32.NewProc("SetRect")
+	setParent = libuser32.NewProc("SetParent")
+	setTimer = libuser32.NewProc("SetTimer")
+	setWindowLong = libuser32.NewProc("SetWindowLongW")
 	// On 32 bit SetWindowLongPtrW is not available
 	if is64bit {
 		setWindowLongPtr = libuser32.NewProc("SetWindowLongPtrW")
@@ -2482,15 +2333,6 @@ func CreateDialogParam(instRes HINSTANCE, name *uint16, parent HWND,
 		uintptr(parent),
 		proc,
 		param,
-		0)
-
-	return HWND(ret)
-}
-
-func GetDlgItem(hDlg HWND, nIDDlgItem uintptr) HWND {
-	ret, _, _ := syscall.Syscall(getDlgItem, 2,
-		uintptr(unsafe.Pointer(hDlg)),
-		uintptr(nIDDlgItem),
 		0)
 
 	return HWND(ret)
@@ -2753,7 +2595,7 @@ func GetActiveWindow() HWND {
 
 func GetClassInfoEx(instance HINSTANCE, className string, wcx *WNDCLASSEX) bool {
 	class := syscall.StringToUTF16Ptr(className)
-	ret, _, _ := syscall.Syscall(getClassInfoEx, 3,
+	ret, _, _ := syscall.Syscall(getClassInfoEx.Addr(), 3,
 		uintptr(unsafe.Pointer(instance)),
 		uintptr(unsafe.Pointer(class)),
 		uintptr(unsafe.Pointer(wcx)))
@@ -2763,7 +2605,7 @@ func GetClassInfoEx(instance HINSTANCE, className string, wcx *WNDCLASSEX) bool 
 
 func GetClassInfo(instance HINSTANCE, className string, wcx *WNDCLASSEX) bool {
 	class := syscall.StringToUTF16Ptr(className)
-	ret, _, _ := syscall.Syscall(getClassInfo, 3,
+	ret, _, _ := syscall.Syscall(getClassInfo.Addr(), 3,
 		uintptr(unsafe.Pointer(instance)),
 		uintptr(unsafe.Pointer(class)),
 		uintptr(unsafe.Pointer(wcx)))
@@ -2772,23 +2614,12 @@ func GetClassInfo(instance HINSTANCE, className string, wcx *WNDCLASSEX) bool {
 }
 
 func GetClassLong(w HWND, index int32) int32 {
-	ret, _, _ := syscall.Syscall(getClassLong, 2,
+	ret, _, _ := syscall.Syscall(getClassLong.Addr(), 2,
 		uintptr(unsafe.Pointer(w)),
 		uintptr(index),
 		0)
 
 	return int32(ret)
-}
-
-func GetClassName(w HWND) string {
-	maxCount := 128
-	buf := make([]uint16, maxCount)
-	_, _, _ = syscall.Syscall(getClassName, 3,
-		uintptr(unsafe.Pointer(w)),
-		uintptr(unsafe.Pointer(&buf[0])),
-		uintptr(maxCount))
-
-	return syscall.UTF16ToString(buf)
 }
 
 func GetAncestor(hWnd HWND, gaFlags uint32) HWND {
@@ -2936,7 +2767,7 @@ func GetMenuCheckMarkDimensions() int32 {
 }
 
 func VkKeyScan(ch uint16) int16 {
-	ret, _, _ := syscall.Syscall(vkKeyScan, uintptr(ch),
+	ret, _, _ := syscall.Syscall(vkKeyScan.Addr(), uintptr(ch),
 		0,
 		0,
 		0)
@@ -2944,7 +2775,7 @@ func VkKeyScan(ch uint16) int16 {
 }
 
 func MapVirtualKey(uCode, uMapType uint32) uint32 {
-	ret, _, _ := syscall.Syscall(mapVirtualKey, uintptr(uCode),
+	ret, _, _ := syscall.Syscall(mapVirtualKey.Addr(), uintptr(uCode),
 		uintptr(uMapType),
 		0,
 		0)
@@ -3004,7 +2835,7 @@ func GetMessage(msg *MSG, hWnd HWND, msgFilterMin, msgFilterMax uint32) BOOL {
 
 func SetWindowText(hWnd HWND, text string) bool {
 	lpText := syscall.StringToUTF16Ptr(text)
-	ret, _, _ := syscall.Syscall(setWindowText, 2,
+	ret, _, _ := syscall.Syscall(setWindowText.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lpText)),
 		0)
@@ -3013,7 +2844,7 @@ func SetWindowText(hWnd HWND, text string) bool {
 }
 
 func GetWindowTextLength(hWnd HWND) int {
-	ret, _, _ := syscall.Syscall(getWindowTextLength, 1,
+	ret, _, _ := syscall.Syscall(getWindowTextLength.Addr(), 1,
 		uintptr(hWnd), 0, 0)
 
 	return int(ret)
@@ -3022,7 +2853,7 @@ func GetWindowTextLength(hWnd HWND) int {
 func GetWindowText(hWnd HWND) string {
 	textLen := GetWindowTextLength(hWnd) + 1
 	buf := make([]uint16, textLen)
-	syscall.Syscall(getWindowText, 3,
+	syscall.Syscall(getWindowText.Addr(), 3,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(&buf[0])),
 		uintptr(textLen))
@@ -3041,7 +2872,7 @@ func GetMonitorInfo(hMonitor HMONITOR, lpmi *MONITORINFO) bool {
 
 func GetProp(hWnd HWND, lpString string) HANDLE {
 	lpText := syscall.StringToUTF16Ptr(lpString)
-	ret, _, _ := syscall.Syscall(getProp, 2,
+	ret, _, _ := syscall.Syscall(getProp.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lpText)),
 		0)
@@ -3051,7 +2882,7 @@ func GetProp(hWnd HWND, lpString string) HANDLE {
 
 func SetProp(hWnd HWND, lpString string, hData HANDLE) BOOL {
 	lpText := syscall.StringToUTF16Ptr(lpString)
-	ret, _, _ := syscall.Syscall(setProp, 3,
+	ret, _, _ := syscall.Syscall(setProp.Addr(), 3,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lpText)),
 		uintptr(hData))
@@ -3150,15 +2981,6 @@ func GetWindow(hWnd HWND, uCmd uint32) HWND {
 	ret, _, _ := syscall.Syscall(getWindow.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(uCmd),
-		0)
-
-	return HWND(ret)
-}
-
-func GetDesktopWindow() HWND {
-	ret, _, _ := syscall.Syscall(getDesktopWindow, 0,
-		0,
-		0,
 		0)
 
 	return HWND(ret)
@@ -3519,7 +3341,7 @@ func RegisterWindowMessage(lpString *uint16) uint32 {
 }
 
 func GetCapture() HWND {
-	ret, _, _ := syscall.Syscall(releaseCapture, 0,
+	ret, _, _ := syscall.Syscall(getCapture.Addr(), 0,
 		0,
 		0,
 		0)
@@ -3651,15 +3473,6 @@ func SetFocus(hWnd HWND) HWND {
 	return HWND(ret)
 }
 
-func GetForegroundWindow() HWND {
-	ret, _, _ := syscall.Syscall(getForegroundWindow, 0,
-		0,
-		0,
-		0)
-
-	return HWND(ret)
-}
-
 func SetForegroundWindow(hWnd HWND) bool {
 	ret, _, _ := syscall.Syscall(setForegroundWindow.Addr(), 1,
 		uintptr(hWnd),
@@ -3670,7 +3483,7 @@ func SetForegroundWindow(hWnd HWND) bool {
 }
 
 func SetLayeredWindowAttributes(hWnd HWND, crKey COLORREF, alpha byte, flags uint32) uint32 {
-	ret, _, _ := syscall.Syscall6(setLayeredWindowAttributes, 4,
+	ret, _, _ := syscall.Syscall6(setLayeredWindowAttributes.Addr(), 4,
 		uintptr(hWnd),
 		uintptr(crKey),
 		uintptr(alpha),

@@ -473,7 +473,7 @@ func SystemTimeToFileTime(lpSystemTime *SYSTEMTIME, lpFileTime *FILETIME) bool {
 }
 
 func SetConsoleTitle(title string) int {
-	ret, _, callErr := syscall.Syscall(setConsoleTitle, 1, uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(title))), 0, 0)
+	ret, _, callErr := syscall.Syscall(setConsoleTitle.Addr(), 1, uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(title))), 0, 0)
 	if callErr != 0 {
 		//fmt.Println("callErr", callErr)
 	}
