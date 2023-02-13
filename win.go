@@ -33,6 +33,17 @@ const (
 	TRUE  = 1
 )
 
+/*
+ * WM_SIZE message wParam values
+ */
+const (
+	SIZE_RESTORED  = 0
+	SIZE_MINIMIZED = 1
+	SIZE_MAXIMIZED = 2
+	SIZE_MAXSHOW   = 3
+	SIZE_MAXHIDE   = 4
+)
+
 type (
 	BOOL    int32
 	HRESULT int32

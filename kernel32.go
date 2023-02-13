@@ -2,14 +2,16 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build windows
 // +build windows
 
 package win
 
 import (
-	"golang.org/x/sys/windows"
 	"syscall"
 	"unsafe"
+
+	"golang.org/x/sys/windows"
 )
 
 const MAX_PATH = 260
@@ -87,6 +89,7 @@ var (
 	setLastError                       *windows.LazyProc
 	sizeofResource                     *windows.LazyProc
 	systemTimeToFileTime               *windows.LazyProc
+	setConsoleTitle                    *windows.LazyProc
 )
 
 type (
@@ -173,6 +176,25 @@ func init() {
 	setLastError = libkernel32.NewProc("SetLastError")
 	sizeofResource = libkernel32.NewProc("SizeofResource")
 	systemTimeToFileTime = libkernel32.NewProc("SystemTimeToFileTime")
+	closeHandle = libkernel32.NewProc("CloseHandle")
+	fileTimeToSystemTime = libkernel32.NewProc("FileTimeToSystemTime")
+	getLastError = libkernel32.NewProc("GetLastError")
+	getLocaleInfo = libkernel32.NewProc("GetLocaleInfoW")
+	getLogicalDriveStrings = libkernel32.NewProc("GetLogicalDriveStringsW")
+	getModuleHandle = libkernel32.NewProc("GetModuleHandleW")
+	getNumberFormat = libkernel32.NewProc("GetNumberFormatW")
+	getProfileString = libkernel32.NewProc("GetProfileStringW")
+	getThreadLocale = libkernel32.NewProc("GetThreadLocale")
+	getVersion = libkernel32.NewProc("GetVersion")
+	globalAlloc = libkernel32.NewProc("GlobalAlloc")
+	globalFree = libkernel32.NewProc("GlobalFree")
+	globalLock = libkernel32.NewProc("GlobalLock")
+	globalUnlock = libkernel32.NewProc("GlobalUnlock")
+	moveMemory = libkernel32.NewProc("RtlMoveMemory")
+	mulDiv = libkernel32.NewProc("MulDiv")
+	setLastError = libkernel32.NewProc("SetLastError")
+	systemTimeToFileTime = libkernel32.NewProc("SystemTimeToFileTime")
+	setConsoleTitle = libkernel32.NewProc("SetConsoleTitleW")
 }
 
 func ActivateActCtx(ctx HANDLE) (uintptr, bool) {
@@ -448,4 +470,12 @@ func SystemTimeToFileTime(lpSystemTime *SYSTEMTIME, lpFileTime *FILETIME) bool {
 		0)
 
 	return ret != 0
+}
+
+func SetConsoleTitle(title string) int {
+	ret, _, callErr := syscall.Syscall(setConsoleTitle, 1, uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(title))), 0, 0)
+	if callErr != 0 {
+		//fmt.Println("callErr", callErr)
+	}
+	return int(ret)
 }
