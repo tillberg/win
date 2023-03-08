@@ -2013,7 +2013,7 @@ func init() {
 	getWindowTextLength = libuser32.NewProc("GetWindowTextLengthW")
 	mapVirtualKey = libuser32.NewProc("MapVirtualKeyW")
 	setProp = libuser32.NewProc("SetPropW")
-	setWindowText = libuser32.NewProc("SetWindowTextW")
+	setWindowText = libuser32.NewProc("SetWindowTextA")
 	vkKeyScan = libuser32.NewProc("VkKeyScanW")
 	// On 32 bit GetWindowLongPtrW is not available
 	if is64bit {
@@ -2079,6 +2079,7 @@ func init() {
 	setWinEventHook = libuser32.NewProc("SetWinEventHook")
 	getCapture = libuser32.NewProc("GetCapture")
 	setLayeredWindowAttributes = libuser32.NewProc("SetLayeredWindowAttributes")
+	setWindowLong = libuser32.NewProc("SetWindowLongW")
 	// On 32 bit SetWindowLongPtrW is not available
 	if is64bit {
 		setWindowLongPtr = libuser32.NewProc("SetWindowLongPtrW")
@@ -2736,7 +2737,8 @@ func GetMessage(msg *MSG, hWnd HWND, msgFilterMin, msgFilterMax uint32) BOOL {
 }
 
 func SetWindowText(hWnd HWND, text string) bool {
-	lpText := syscall.StringToUTF16Ptr(text)
+	// lpText := syscall.StringToUTF16Ptr(text)
+	lpText := syscall.StringBytePtr(text)
 	ret, _, _ := syscall.Syscall(setWindowText.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lpText)),
