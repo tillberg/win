@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build windows
 // +build windows
 
 package win
@@ -1062,6 +1063,7 @@ var (
 	createEnhMetaFile       *windows.LazyProc
 	createIC                *windows.LazyProc
 	createPatternBrush      *windows.LazyProc
+	createSolidBrush        *windows.LazyProc
 	createRectRgn           *windows.LazyProc
 	deleteDC                *windows.LazyProc
 	deleteEnhMetaFile       *windows.LazyProc
@@ -1142,6 +1144,7 @@ func init() {
 	createFontIndirect = libgdi32.NewProc("CreateFontIndirectW")
 	createIC = libgdi32.NewProc("CreateICW")
 	createPatternBrush = libgdi32.NewProc("CreatePatternBrush")
+	createSolidBrush = libgdi32.NewProc("CreateSolidBrush")
 	createRectRgn = libgdi32.NewProc("CreateRectRgn")
 	deleteDC = libgdi32.NewProc("DeleteDC")
 	deleteEnhMetaFile = libgdi32.NewProc("DeleteEnhMetaFile")
@@ -1401,6 +1404,15 @@ func CreateIC(lpszDriver, lpszDevice, lpszOutput *uint16, lpdvmInit *DEVMODE) HD
 func CreatePatternBrush(hbmp HBITMAP) HBRUSH {
 	ret, _, _ := syscall.Syscall(createPatternBrush.Addr(), 1,
 		uintptr(hbmp),
+		0,
+		0)
+
+	return HBRUSH(ret)
+}
+
+func CreateSolidBrush(colorref COLORREF) HBRUSH {
+	ret, _, _ := syscall.Syscall(createSolidBrush.Addr(), 1,
+		uintptr(colorref),
 		0,
 		0)
 

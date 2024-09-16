@@ -844,6 +844,8 @@ const (
 	WM_SETFONT                = 48
 	WM_SETHOTKEY              = 50
 	WM_SETICON                = 128
+	WM_IME_SETCONTEXT         = 641
+	WM_IME_NOTIFY             = 642
 	WM_SETREDRAW              = 11
 	WM_SETTEXT                = 12
 	WM_SETTINGCHANGE          = 26
@@ -3166,7 +3168,7 @@ func PeekMessage(lpMsg *MSG, hWnd HWND, wMsgFilterMin, wMsgFilterMax, wRemoveMsg
 	return ret != 0
 }
 
-func PostMessage(hWnd HWND, msg uint32, wParam, lParam uintptr) uintptr {
+func PostMessage(hWnd HWND, msg uint32, wParam, lParam uintptr) bool {
 	ret, _, _ := syscall.Syscall6(postMessage.Addr(), 4,
 		uintptr(hWnd),
 		uintptr(msg),
@@ -3175,7 +3177,7 @@ func PostMessage(hWnd HWND, msg uint32, wParam, lParam uintptr) uintptr {
 		0,
 		0)
 
-	return ret
+	return ret != 0
 }
 
 func PostQuitMessage(exitCode int32) {
@@ -3311,7 +3313,7 @@ func SendInput(nInputs uint32, pInputs unsafe.Pointer, cbSize int32) uint32 {
 	return uint32(ret)
 }
 
-func SendMessage(hWnd HWND, msg uint32, wParam, lParam uintptr) uintptr {
+func SendMessage(hWnd HWND, msg uint32, wParam, lParam uintptr) bool {
 	ret, _, _ := syscall.Syscall6(sendMessage.Addr(), 4,
 		uintptr(hWnd),
 		uintptr(msg),
@@ -3320,7 +3322,7 @@ func SendMessage(hWnd HWND, msg uint32, wParam, lParam uintptr) uintptr {
 		0,
 		0)
 
-	return ret
+	return ret != 0
 }
 
 func SetActiveWindow(hWnd HWND) HWND {
@@ -3564,6 +3566,10 @@ func ShowWindow(hWnd HWND, nCmdShow int32) bool {
 
 	return ret != 0
 }
+
+const (
+	SPI_GETWORKAREA = 0x0030
+)
 
 func SystemParametersInfo(uiAction, uiParam uint32, pvParam unsafe.Pointer, fWinIni uint32) bool {
 	ret, _, _ := syscall.Syscall6(systemParametersInfo.Addr(), 4,
